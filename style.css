@@ -54,6 +54,8 @@ img{
     margin: 0 auto;
 }
 
+/* header */
+
 header{
     display: flex;
     justify-content: space-between;
@@ -133,4 +135,155 @@ header nav ul li.btn a:hover{
 .hero img{
     max-width: 40%;
     height: auto;
+}
+
+/* секция карточек tutors  */
+
+.tutors{
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    padding-bottom: 100px;
+}
+
+.tutors-slider{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid-tutors{
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap:30px;
+    margin: 0 auto;
+    padding: 40px 10px;
+    scrollbar-width: none;
+}
+
+.tutor-card {
+    min-width: calc((100% - (2 * 30px)) / 3); 
+    max-width: calc((100% - (2 * 30px)) / 3);
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.tutor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(162, 155, 254, 0.2);
+}
+
+.tutor-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.tutor-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.tutor-info h3 {
+    margin: 0;
+    color: #2d3436;
+}
+
+.tutor-price {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #a29bfe;
+}
+
+.btn--subjects{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    gap: 40px;
+}
+
+.btn--subjects .btn{
+    font-family: 'Raleway', sans-serif;
+    padding: 10px 20px;
+    border: 2px solid #9586f7;
+    background-color: transparent;
+    border-radius: 30px;
+    transition: all 500ms ease;    
+}
+
+.btn--subjects .btn:hover{
+    background: #c3bcf8;
+}
+
+.btn--subjects .btn.active {
+    background-color: #c3bcf8;
+    border-color: #9586f7;
+    color: white;
+}
+
+.btn-sign_up{
+    font-family: 'Raleway', sans-serif;
+    font-size: medium;
+    font-weight: 500;
+    padding: 10px 20px;
+    border: 0px ;
+    background-color: #c3bcf8;
+    border-radius: 20px;
+    transition: transform 0.3s ease-in-out;    
+}
+
+.btn-sign_up:hover{    
+    background: #9586f7;
+    transform: scale(1.1);
+}
+
+.slider-btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #c3bcf8;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+}
+
+.prev {
+    left: -25px;
+}
+
+.next {
+    right: -25px;
+}
+
+.slider-btn:hover {
+    background: #9586f7;
+    transform: translateY(-50%) scale(1.1);
 }
