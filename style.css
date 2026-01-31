@@ -19,6 +19,22 @@
         flex-direction: column;
         gap: 20px;
     }
+    .tutors-slider {
+        padding: 0 40px;
+    }
+
+    .grid-tutors {
+        gap: 20px;
+    }
+
+    .tutor-card {        
+        flex: 0 0 calc(100% - 10px); 
+        width: calc(100% - 10px);
+        min-width: calc(100% - 10px);
+    }
+
+    .prev { left: -10px; }
+    .next { right: -10px; }
 }
 
 *{
