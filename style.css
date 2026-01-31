@@ -19,22 +19,35 @@
         flex-direction: column;
         gap: 20px;
     }
+
     .tutors-slider {
         padding: 0 40px;
     }
 
     .grid-tutors {
-        gap: 20px;
+        gap: 0;
+        padding: 20px 0;
+        overflow-x: auto; 
+        scroll-snap-type: x mandatory;
     }
 
-    .tutor-card {        
-        flex: 0 0 calc(100% - 10px); 
-        width: calc(100% - 10px);
-        min-width: calc(100% - 10px);
+    .tutor-card {
+        flex: 0 0 100%; 
+        width: 100%;
+        min-width: 100%;
+        margin: 0;
+        scroll-snap-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-    .prev { left: -10px; }
-    .next { right: -10px; }
+    .slider-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+    
+    .prev { left: 5px; }
+    .next { right: 5px; }
 }
 
 *{
