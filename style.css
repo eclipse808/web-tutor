@@ -47,6 +47,46 @@
     }
     .prev { left: 5px; }
     .next { right: 5px; }
+
+    /*окно записи*/
+
+    .modal-content {
+        padding: 25px 15px;
+        width: 95%;
+    }
+
+    .booking-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .calendar-part, .time-part {
+        width: 100%;
+    }
+
+    .time-slots {
+        justify-content: center;
+    }
+
+    .time-slot {
+        flex: 1 1 70px;
+        text-align: center;
+    }
+
+    .success-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .calendar-btn, .close-btn-final {
+        width: 100%;
+    }
+
+    #modal-title {
+        font-size: 1.2rem;
+        text-align: center;
+    }
 }
 
 
@@ -318,7 +358,7 @@ header nav ul li.btn a:hover{
     color: white;
 }
 
-.btn-sign_up{
+.btn-order{
     font-family: 'Raleway', sans-serif;
     font-size: medium;
     font-weight: 500;
@@ -329,7 +369,7 @@ header nav ul li.btn a:hover{
     transition: transform 0.3s ease-in-out;    
 }
 
-.btn-sign_up:hover{    
+.btn-order:hover{    
     background: #9586f7;
     transform: scale(1.1);
 }
@@ -392,4 +432,161 @@ footer {
     margin-left: 20px;
     color: #9586f7;
     font-weight: bold;
+}
+
+/*форма записи*/
+
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #edebfd;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #888;
+}
+
+.booking-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+    gap: 10px;
+}
+
+.time-slot {
+    padding: 8px;
+    border: 1px solid #9586f7;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.time-slot.busy {
+    background: #e0e0e0;
+    border-color: #ccc;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.time-slot.selected {
+    background: #9586f7;
+    color: white;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group input, 
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    font-family: inherit;
+}
+
+.input-group textarea {
+    height: 80px;
+    resize: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #a29bfe;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+ /*окно успешной записи*/
+#success-step {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.success-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+.success-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+.calendar-btn {
+    padding: 12px 20px;
+    background: transparent;
+    color: #a29bfe;
+    border: 2px solid #a29bfe;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.calendar-btn:hover {
+    background: #f4f3ff;
+    transform: translateY(-2px);
+}
+
+.close-btn-final {
+    padding: 12px 20px;
+    background: #a29bfe;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    box-shadow: 0 4px 15px rgba(162, 155, 254, 0.3);
+}
+
+.close-btn-final:hover {
+    background: #8e85f1;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(162, 155, 254, 0.4);
 }

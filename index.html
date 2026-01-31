@@ -63,7 +63,7 @@
                         </div>
                         <p class="tutor-exp">Опыт:5 лет</p>
                         <p class="tutor-price">1200 ₽/час</p>
-                        <button class="btn-sign_up">Записаться</button>
+                        <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
 
@@ -83,7 +83,7 @@
                         </div>
                         <p class="tutor-exp">Опыт:7 лет</p>
                         <p class="tutor-price">1500 ₽/час</p>
-                        <button class="btn-sign_up">Записаться</button>
+                        <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
 
@@ -103,7 +103,7 @@
                         </div>
                         <p class="tutor-exp">Опыт:12 лет</p>
                         <p class="tutor-price">2200 ₽/час</p>
-                        <button class="btn-sign_up">Записаться</button>
+                        <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
 
@@ -118,12 +118,12 @@
                             <span class="stars-active">★</span>
                             <span class="stars-active">★</span>
                             <span class="stars-active">★</span>
-                            <span class="stars-active">★</span>
+                            <span class="stars-non_active">★</span>
                             <span class="rating-num">4.6</span>
                         </div>
                         <p class="tutor-exp">Опыт:2 года</p>
                         <p class="tutor-price">1300 ₽/час</p>
-                        <button class="btn-sign_up">Записаться</button>
+                        <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
 
@@ -138,12 +138,12 @@
                             <span class="stars-active">★</span>
                             <span class="stars-active">★</span>
                             <span class="stars-active">★</span>
-                            <span class="stars-active">★</span>
+                            <span class="stars-non_active">★</span>
                             <span class="rating-num">4.8</span>
                         </div>
                         <p class="tutor-exp">Опыт:5 лет</p>
                         <p class="tutor-price">1700 ₽/час</p>
-                        <button class="btn-sign_up">Записаться</button>
+                        <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
                 
@@ -167,7 +167,50 @@
     </footer>
     </div>
 
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+
+            <div id="booking-step">
+                <h2 id="modal-title">Запись к репертитору</h2>
+
+                <div class="booking-grid">
+                    <div class="calendar-part">
+                        <label>1. Выберите дату:</label>
+                        <input type="date" id="booking-date" min="2026-02-01">
+                    </div>
+
+                    <div class="time-part">
+                        <label>2. Выберите время:</label>
+                        <div id="time-slots" class="time-slots"></div>
+                    </div>
+                </div>
+
+            <form id="order-form">
+                <div class="input-group">
+                    <input type="text" id="user-name" placeholder="Имя ученика (обязательно)" required>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="user-contact" placeholder="Email или телефон (обязательно)" required>
+                </div>
+                <div class="input-group">
+                    <textarea id="user-comment" placeholder="Комментарий (необязательно)"></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submit-booking" disabled>Записаться</button>
+            </form>
+        </div>
+
+        <div id="success-step" style="display: none;">
+            <div class="success-icon">✨</div>
+            <h2>Успешно!</h2>
+            <p id="success-message">Вы записаны на ...</p>
+            <div class="success-buttons">
+                <button class="calendar-btn">Добавить в календарь</button>
+                <button class="close-btn-final">Отлично</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
-
 </html>
