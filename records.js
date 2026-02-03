@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const listContainer = document.getElementById('bookings-list');
     const noRecordsMsg = document.getElementById('no-records');
-    const bookings = JSON.parse(localStorage.getItem('myBookings')) || [];
+    const bookings = JSON.parse(localStorage.getItem('myBookings')) || []; //загрузка данных из localstorage
 
     if (bookings.length > 0) {
         noRecordsMsg.style.display = 'none';
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'record-card';
             
+            //создание карточки на основе данных
             card.innerHTML = `
                 <div class="record-side-panel">
                     <span>✎</span> </div>
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+//удаление записи из localstorage+обновление интрерфейса
 function deleteBooking(id) {
     if (confirm('Удалить эту запись?')) {
         let bookings = JSON.parse(localStorage.getItem('myBookings')) || [];

@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-@media (max-width: 768px) {
+
+/*для телефонов*/
+@media (max-width: 768px) { 
     .hero {
         flex-direction: column;
         text-align: center;
@@ -49,7 +51,6 @@
     .next { right: 5px; }
 
     /*окно записи*/
-
     .modal-content {
         padding: 25px 15px;
         width: 95%;
@@ -163,7 +164,7 @@
     }
 }
 
-
+/*стили для index.html*/
 *{
     margin: 0;
     padding: 0;
@@ -301,7 +302,6 @@ header nav ul li.btn a:hover{
 }
 
 /* секция карточек tutors  */
-
 .tutors{
     font-family: 'Raleway', sans-serif;
     text-align: center;
@@ -509,7 +509,6 @@ footer {
 }
 
 /*форма записи*/
-
 .modal-overlay {
     position: fixed;
     top: 0; left: 0;

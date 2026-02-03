@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const priceDisplay = document.getElementById('current-price');
     let selectedPrice = 1500;        
 
+    //занятые слоты "дата-время" для записи
     const allTimeSlots = ['15:00', '16:00', '17:00', '18:00', '19:30'];
     const busySlots = {
         '2026-02-01': ['15:00', '16:00', '17:00', '18:00'],
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '2026-02-08': ['15:00', '16:00',]
     };
     
+    //пересчет стоимости при выборе длительности занятия
     durationBtns.forEach(btn => {
         btn.addEventListener('click', () => {
 
@@ -39,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    /*фильтрация*/
+    /*фильтрация репетиторов по предметам*/
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {            
             filterBtns.forEach(b => b.classList.remove('active'));
@@ -95,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
+    //генерация слотов времени с учетом занятого времени
     dateInput.addEventListener('change', () => {
         const date = dateInput.value;
         const busyOnThisDate = busySlots[date] || [];
@@ -125,53 +128,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /*валидация формы*/
     function checkFormValidity() {
-    const nameInput = document.getElementById('user-name');
-    const contactInput = document.getElementById('user-contact');
-    const nameError = document.getElementById('name-error');
-    const contactError = document.getElementById('contact-error');
-    
-    const nameValue = nameInput.value.trim();
-    const contactValue = contactInput.value.trim();
+        const nameInput = document.getElementById('user-name');
+        const contactInput = document.getElementById('user-contact');
+        const nameError = document.getElementById('name-error');
+        const contactError = document.getElementById('contact-error');
+        
+        const nameValue = nameInput.value.trim();
+        const contactValue = contactInput.value.trim();
 
-    // валидация имени: только буквы, минимум 2 символа 
-    const nameRegex = /^[a-zA-Zа-яА-ЯёЁ\s\-]+$/;
-    let isNameValid = false;
+        // валидация имени: только буквы, минимум 2 символа 
+        const nameRegex = /^[a-zA-Zа-яА-ЯёЁ\s\-]+$/;
+        let isNameValid = false;
 
-    if (nameValue.length === 0) {
-        nameError.innerText = "";
-        nameInput.classList.remove('invalid');
-    } else if (nameValue.length < 2) {
-        nameError.innerText = "Минимум 2 символа";
-        nameInput.classList.add('invalid');
-    } else if (!nameRegex.test(nameValue)) {
-        nameError.innerText = "Только буквы";
-        nameInput.classList.add('invalid');
-    } else {
-        nameError.innerText = "";
-        nameInput.classList.remove('invalid');
-        isNameValid = true;
+        if (nameValue.length === 0) {
+            nameError.innerText = "";
+            nameInput.classList.remove('invalid');
+        } else if (nameValue.length < 2) {
+            nameError.innerText = "Минимум 2 символа";
+            nameInput.classList.add('invalid');
+        } else if (!nameRegex.test(nameValue)) {
+            nameError.innerText = "Только буквы";
+            nameInput.classList.add('invalid');
+        } else {
+            nameError.innerText = "";
+            nameInput.classList.remove('invalid');
+            isNameValid = true;
+        }
+
+        // валидация контакта: @ для почты или цифры для телефона
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^(\+7|7|8)?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+        let isContactValid = false;
+
+        if (contactValue.length === 0) {
+            contactError.innerText = "";
+            contactInput.classList.remove('invalid');
+        } else if (emailRegex.test(contactValue) || phoneRegex.test(contactValue)) {
+            contactError.innerText = "";
+            contactInput.classList.remove('invalid');
+            isContactValid = true;
+        } else {
+            contactError.innerText = "Введите корректный email или телефон";
+            contactInput.classList.add('invalid');
+        }
+
+        const isTimeSelected = selectedTime !== null;
+        submitBtn.disabled = !(isNameValid && isContactValid && isTimeSelected);
     }
-    // валидация контакта: @ для почты или цифры для телефона
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^(\+7|7|8)?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
-    let isContactValid = false;
 
-    if (contactValue.length === 0) {
-        contactError.innerText = "";
-        contactInput.classList.remove('invalid');
-    } else if (emailRegex.test(contactValue) || phoneRegex.test(contactValue)) {
-        contactError.innerText = "";
-        contactInput.classList.remove('invalid');
-        isContactValid = true;
-    } else {
-        contactError.innerText = "Введите корректный email или телефон";
-        contactInput.classList.add('invalid');
-    }
-
-    const isTimeSelected = selectedTime !== null;
-    submitBtn.disabled = !(isNameValid && isContactValid && isTimeSelected);
-    }
-
+    //обработка формы. сохранение в localstorage. уведомление
     bookingForm.addEventListener('input', checkFormValidity);
     bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -194,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        //сохранение в localstorage
+        //сохранение в localstorage для страницы "мои записи"
         const newBooking = {
             id: Date.now(),
             tutor: tutorName,
@@ -211,6 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerText = "Отправка...";
         submitBtn.disabled = true;
 
+        //имитация задерки сервера в 1.5сек
         setTimeout(() => {
             document.getElementById('booking-step').style.display = 'none';
             document.getElementById('success-step').style.display = 'block';
@@ -227,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    //очитска формы
     function resetForm() {
         bookingForm.reset();
         document.getElementById('booking-step').style.display = 'block';
