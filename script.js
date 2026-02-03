@@ -175,17 +175,57 @@ document.addEventListener('DOMContentLoaded', () => {
     bookingForm.addEventListener('input', checkFormValidity);
     bookingForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        
+        // данные о записи
+        const tutorName = document.getElementById('modal-title').innerText.replace('Запись к ', '');
+        const activeDuration = document.querySelector('.duration-btn.active').innerText;
+        const currentPrice = document.getElementById('current-price').innerText;
+
+        // логика уведомлений
+        if ("Notification" in window) {
+            if (Notification.permission === "granted") {
+                sendNotification(tutorName, selectedTime);
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        sendNotification(tutorName, selectedTime);
+                    }
+                });
+            }
+        }
+
+        //сохранение в localstorage
+        const newBooking = {
+            id: Date.now(),
+            tutor: tutorName,
+            date: dateInput.value,
+            time: selectedTime,
+            duration: activeDuration,
+            price: currentPrice,
+            userName: document.getElementById('user-name').value
+        };
+        const allBookings = JSON.parse(localStorage.getItem('myBookings')) || [];
+        allBookings.push(newBooking);
+        localStorage.setItem('myBookings', JSON.stringify(allBookings));
+
         submitBtn.innerText = "Отправка...";
         submitBtn.disabled = true;
-        
+
         setTimeout(() => {
-            const activeDuration = document.querySelector('.duration-btn.active').innerText;
             document.getElementById('booking-step').style.display = 'none';
             document.getElementById('success-step').style.display = 'block';
             document.getElementById('success-message').innerText = 
-                `Вы записаны на ${dateInput.value} в ${selectedTime} (длительность занятия:${activeDuration})`;
+                `Вы записаны на ${dateInput.value} в ${selectedTime} (${activeDuration})`;
         }, 1500);
     });
+
+    //уведомление notification
+    function sendNotification(name, time) {
+        new Notification("Успешная запись!", {
+            body: `Репетитор: ${name}\nВремя: ${time}`,
+            icon: "img/icon.png"
+        });
+    }
 
     function resetForm() {
         bookingForm.reset();

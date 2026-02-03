@@ -635,3 +635,91 @@ input.invalid {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(162, 155, 254, 0.4);
 }
+
+/*records.html*/
+.records-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin: 40px 0;
+    color: #2d3436;
+}
+
+.records-frame {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 60px 40px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bookings-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+
+.record-card {
+    background: white;
+    border-radius: 20px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    position: relative;
+    min-height: 220px;
+}
+
+.record-side-panel {
+    width: 60px;
+    background: #a29bfe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.record-body {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.record-body h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #2d3436;
+}
+
+.record-info-item {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin: 2px 0;
+}
+
+.btn-cancel {
+    margin-top: 15px;
+    background: transparent;
+    border: 1px solid #ff7675;
+    color: #ff7675;
+    padding: 8px 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-cancel:hover {
+    background: #ff7675;
+    color: white;
+}
+
+.empty-msg {
+    text-align: center;
+    color: #b2bec3;
+    margin-top: 40px;
+}
