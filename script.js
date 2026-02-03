@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submit-booking');
     let selectedTime = null;
 
+    const durationBtns = document.querySelectorAll('.duration-btn');
+    const priceDisplay = document.getElementById('current-price');
+    let selectedPrice = 1500;        
+
     const allTimeSlots = ['15:00', '16:00', '17:00', '18:00', '19:30'];
     const busySlots = {
         '2026-02-01': ['15:00', '16:00', '17:00', '18:00'],
@@ -24,6 +28,17 @@ document.addEventListener('DOMContentLoaded', () => {
         '2026-02-08': ['15:00', '16:00',]
     };
     
+    durationBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            durationBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            selectedPrice = btn.getAttribute('data-price');
+            priceDisplay.innerText = selectedPrice;
+        });
+    });
+
     /*фильтрация*/
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {            
@@ -110,15 +125,51 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /*валидация формы*/
     function checkFormValidity() {
-        const name = document.getElementById('user-name').value.trim();
-        const contact = document.getElementById('user-contact').value.trim();
-        const submitBtn = document.getElementById('submit-booking');
-        console.log("Время выбрано:", selectedTime);    
-        const isNameValid = name.length >= 2;
-        const isContactValid = contact.length >= 5;
-        const isTimeSelected = selectedTime !== null;
+    const nameInput = document.getElementById('user-name');
+    const contactInput = document.getElementById('user-contact');
+    const nameError = document.getElementById('name-error');
+    const contactError = document.getElementById('contact-error');
+    
+    const nameValue = nameInput.value.trim();
+    const contactValue = contactInput.value.trim();
 
-        submitBtn.disabled = !(isNameValid && isContactValid && isTimeSelected);
+    // валидация имени: только буквы, минимум 2 символа 
+    const nameRegex = /^[a-zA-Zа-яА-ЯёЁ\s\-]+$/;
+    let isNameValid = false;
+
+    if (nameValue.length === 0) {
+        nameError.innerText = "";
+        nameInput.classList.remove('invalid');
+    } else if (nameValue.length < 2) {
+        nameError.innerText = "Минимум 2 символа";
+        nameInput.classList.add('invalid');
+    } else if (!nameRegex.test(nameValue)) {
+        nameError.innerText = "Только буквы";
+        nameInput.classList.add('invalid');
+    } else {
+        nameError.innerText = "";
+        nameInput.classList.remove('invalid');
+        isNameValid = true;
+    }
+    // валидация контакта: @ для почты или цифры для телефона
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^(\+7|7|8)?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/;
+    let isContactValid = false;
+
+    if (contactValue.length === 0) {
+        contactError.innerText = "";
+        contactInput.classList.remove('invalid');
+    } else if (emailRegex.test(contactValue) || phoneRegex.test(contactValue)) {
+        contactError.innerText = "";
+        contactInput.classList.remove('invalid');
+        isContactValid = true;
+    } else {
+        contactError.innerText = "Введите корректный email или телефон";
+        contactInput.classList.add('invalid');
+    }
+
+    const isTimeSelected = selectedTime !== null;
+    submitBtn.disabled = !(isNameValid && isContactValid && isTimeSelected);
     }
 
     bookingForm.addEventListener('input', checkFormValidity);
@@ -128,10 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
         
         setTimeout(() => {
+            const activeDuration = document.querySelector('.duration-btn.active').innerText;
             document.getElementById('booking-step').style.display = 'none';
             document.getElementById('success-step').style.display = 'block';
             document.getElementById('success-message').innerText = 
-                `Вы записаны на ${dateInput.value} в ${selectedTime}`;
+                `Вы записаны на ${dateInput.value} в ${selectedTime} (длительность занятия:${activeDuration})`;
         }, 1500);
     });
 

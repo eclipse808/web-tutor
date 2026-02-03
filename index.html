@@ -62,7 +62,7 @@
                             <span class="rating-num">4.8</span>
                         </div>
                         <p class="tutor-exp">Опыт:5 лет</p>
-                        <p class="tutor-price">1200 ₽/час</p>
+                        <p class="tutor-price">1500 ₽/час</p>
                         <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
@@ -102,7 +102,7 @@
                             <span class="rating-num">5</span>
                         </div>
                         <p class="tutor-exp">Опыт:12 лет</p>
-                        <p class="tutor-price">2200 ₽/час</p>
+                        <p class="tutor-price">1500 ₽/час</p>
                         <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
@@ -122,7 +122,7 @@
                             <span class="rating-num">4.6</span>
                         </div>
                         <p class="tutor-exp">Опыт:2 года</p>
-                        <p class="tutor-price">1300 ₽/час</p>
+                        <p class="tutor-price">1500 ₽/час</p>
                         <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
@@ -142,7 +142,7 @@
                             <span class="rating-num">4.8</span>
                         </div>
                         <p class="tutor-exp">Опыт:5 лет</p>
-                        <p class="tutor-price">1700 ₽/час</p>
+                        <p class="tutor-price">1500 ₽/час</p>
                         <button class="btn btn-order">Записаться</button>
                     </div>
                 </article>
@@ -184,15 +184,25 @@
                         <label>2. Выберите время:</label>
                         <div id="time-slots" class="time-slots"></div>
                     </div>
+
+                    <div class="duration-selection">
+                        <label>3. Длительность занятия:</label>
+                        <div class="duration-btns">
+                            <button type="button" class="duration-btn active" data-minutes="60" data-price="1500">60 мин</button>
+                            <button type="button" class="duration-btn" data-minutes="90" data-price="2250">90 мин</button>
+                            <button type="button" class="duration-btn" data-minutes="120" data-price="3000">120 мин</button>
+                        </div>
+                        <p class="price-display">Стоимость: <span id="current-price">1500</span> руб.</p>
+                    </div>
                 </div>
 
             <form id="order-form">
                 <div class="input-group">
                     <input type="text" id="user-name" placeholder="Имя ученика (обязательно)" required>
-                </div>
+                    <span id="name-error" class="error-message"></span> </div>
                 <div class="input-group">
                     <input type="text" id="user-contact" placeholder="Email или телефон (обязательно)" required>
-                </div>
+                    <span id="contact-error" class="error-message"></span> </div>
                 <div class="input-group">
                     <textarea id="user-comment" placeholder="Комментарий (необязательно)"></textarea>
                 </div>
