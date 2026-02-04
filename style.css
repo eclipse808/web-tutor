@@ -278,6 +278,7 @@ header nav ul li.btn a:hover{
 }
 
 .hero--info h1{
+    text-align: left;
     color:#9586f7;
     font-size: 40px;
     font-weight: 600;
